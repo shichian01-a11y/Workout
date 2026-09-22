@@ -1,2 +1,156 @@
 # Workout
 Workout
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>今日極簡課表抽籤</title>
+  <style>
+    :root {
+      --bg: #121214;
+      --card: #1e1e24;
+      --primary: #f59e0b;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --accent: #3b82f6;
+    }
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      width: 100%;
+      max-width: 480px;
+    }
+    h1 {
+      font-size: 1.4rem;
+      text-align: center;
+      margin-bottom: 24px;
+      color: var(--primary);
+    }
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      border: 1px solid #2d2d38;
+    }
+    .step-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .random-card {
+      border-left: 4px solid var(--accent);
+    }
+    .random-highlight {
+      color: #60a5fa;
+      font-weight: 700;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: var(--primary);
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: transform 0.1s ease, filter 0.2s ease;
+    }
+    button:active {
+      transform: scale(0.98);
+      filter: brightness(0.9);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🏋️‍♂️ 每日 4 步驟訓練抽籤</h1>
+
+  <!-- 步驟 1 -->
+  <div class="card">
+    <div class="step-tag">步驟 1：爆發開場（固定）</div>
+    <div class="title">Power Clean (爆發上膊)</div>
+    <div class="desc">5 組 × 3 下（輕快、爆發、喚醒神經，不拚力竭）</div>
+  </div>
+
+  <!-- 步驟 2 -->
+  <div class="card random-card">
+    <div class="step-tag">步驟 2：複合主項（隨機抽取）</div>
+    <div class="title random-highlight" id="mainMove">點擊下方按鈕抽籤</div>
+    <div class="desc">3 組 × 8–12 下</div>
+  </div>
+
+  <!-- 步驟 3 -->
+  <div class="card random-card">
+    <div class="step-tag">步驟 3：肩臂副項（隨機抽取）</div>
+    <div class="title random-highlight" id="accMove">點擊下方按鈕抽籤</div>
+    <div class="desc" id="accDesc">各做 3 組 × 8–12 下</div>
+  </div>
+
+  <!-- 步驟 4 -->
+  <div class="card">
+    <div class="step-tag">步驟 4：有氧燃脂（固定）</div>
+    <div class="title">跑步 / 低強度有氧</div>
+    <div class="desc">1.6 ~ 3.2 公里（快走或超慢跑，15–20 分鐘）</div>
+  </div>
+
+  <button onclick="rollWorkout()">🎲 隨機決定今日課表</button>
+</div>
+
+<script>
+  const mains = [
+    "澤奇深蹲 (Zercher Squat)",
+    "坐姿槓鈴肩推 (Seated OHP)",
+    "六角槓硬舉 (Hex Bar Deadlift)"
+  ];
+
+  const accessories = [
+    {
+      title: "模組 C (手臂專攻)",
+      desc: "二頭彎舉 ＋ 三頭伸展/下壓（各 3 組 × 8–12 下）"
+    },
+    {
+      title: "模組 D (肩膀專攻)",
+      desc: "側平舉 ＋ 反向飛鳥/Face Pull（各 3 組 × 8–12 下）"
+    }
+  ];
+
+  function rollWorkout() {
+    const pickedMain = mains[Math.floor(Math.random() * mains.length)];
+    const pickedAcc = accessories[Math.floor(Math.random() * accessories.length)];
+
+    document.getElementById("mainMove").innerText = pickedMain;
+    document.getElementById("accMove").innerText = pickedAcc.title;
+    document.getElementById("accDesc").innerText = pickedAcc.desc;
+  }
+
+  // 初次載入自動抽取一次
+  rollWorkout();
+</script>
+
+</body>
+</html>
